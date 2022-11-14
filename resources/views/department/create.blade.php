@@ -24,23 +24,19 @@
             <div class="card-header">
               <h3 class="card-title">{{$title}}</h3>
             </div>
-            <form role="form" action="/karyawan/store" method="post">
+            <form role="form" action="/department/store" method="post">
               <div class="card-body">
                 <div class="form-group">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="_method" value="POST">
                 </div>
                 <div class="form-group">
-                  <label>Nama</label>
-                  <input type="text" class="form-control" name="nama" placeholder="Enter Nama">
+                  <label>Name</label>
+                  <input type="text" class="form-control" name="name" placeholder="Enter Name">
                 </div>
                 <div class="form-group">
-                  <label>Alamat</label>
-                  <input type="text" class="form-control" name="alamat" placeholder="Enter Alamat">
-                </div>
-                <div class="form-group">
-                  <label>Jabatan</label>
-                  <input type="text" class="form-control" name="jabatan" placeholder="Enter Jabatan">
+                  <label>Code</label>
+                  <input type="text" class="form-control" name="code" placeholder="Enter Code">
                 </div>
 
               <!-- /.card-body -->

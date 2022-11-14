@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Department;
 
-class KaryawanController extends Controller
+class DepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $judul = "Karyawan";
+        $judul = "Department";
 
         // Query Builder
-        $karyawan = DB::table('karyawan')->get();
+        $department = Department::all();
 
-        return view('karyawan.home',[
+        return view('department.home',[
             "title" => $judul,
-            "data" => $karyawan,
+            "data" => $department,
         ]);
     }
 
@@ -32,8 +32,8 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('karyawan.create',[
-            "title" => "Tambah Karyawan",
+        return view('department.create',[
+            "title" => "Tambah Department",
         ]);
     }
 
@@ -45,15 +45,14 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        $department = new Department();
 
-        DB::table('karyawan')->insert([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'jabatan' => $request->jabatan,
-        ]);
+        $department->name = $request->name;
+        $department->code = $request->code;
 
-        return redirect('/karyawan');
+        $department->save();
+
+        return redirect('/department');
     }
 
     /**
@@ -75,13 +74,12 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        $karyawan = DB::table('karyawan')->where("id","=",$id)->first();
+        // $department = Department::find($id);
+        $department = Department::where('id','=',$id)->first();
 
-        // dd($karyawan);
-
-        return view('karyawan.edit',[
-            "title" => "Edit Karyawan",
-            "data" => $karyawan,
+        return view('department.edit',[
+            "title" => "Edit Department",
+            "data" => $department,
         ]);
     }
 
@@ -94,15 +92,13 @@ class KaryawanController extends Controller
      */
     public function update(Request $request)
     {
-        DB::table('karyawan')
-              ->where('id','=',$request->id)
-              ->update([
-                'nama' => $request->nama,
-                'alamat' => $request->alamat,
-                'jabatan' => $request->jabatan,
-            ]);
+        $department = Department::find($request->id);
+        $department->name = $request->name;
+        $department->code = $request->code;
 
-        return redirect('/karyawan');
+        $department->save();
+
+        return redirect('/department');
     }
 
     /**
@@ -113,7 +109,6 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('karyawan')->where("id","=",$id)->delete();
-        return redirect('/karyawan');
+        //
     }
 }

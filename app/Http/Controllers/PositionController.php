@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Position;
 
-class KaryawanController extends Controller
+class PositionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,14 +14,14 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $judul = "Karyawan";
+        $judul = "Position";
 
         // Query Builder
-        $karyawan = DB::table('karyawan')->get();
+        $position = Position::all();
 
-        return view('karyawan.home',[
+        return view('position.home',[
             "title" => $judul,
-            "data" => $karyawan,
+            "data" => $position,
         ]);
     }
 
@@ -32,9 +32,7 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('karyawan.create',[
-            "title" => "Tambah Karyawan",
-        ]);
+        //
     }
 
     /**
@@ -45,15 +43,7 @@ class KaryawanController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-
-        DB::table('karyawan')->insert([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'jabatan' => $request->jabatan,
-        ]);
-
-        return redirect('/karyawan');
+        //
     }
 
     /**
@@ -75,14 +65,7 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        $karyawan = DB::table('karyawan')->where("id","=",$id)->first();
-
-        // dd($karyawan);
-
-        return view('karyawan.edit',[
-            "title" => "Edit Karyawan",
-            "data" => $karyawan,
-        ]);
+        //
     }
 
     /**
@@ -92,17 +75,9 @@ class KaryawanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        DB::table('karyawan')
-              ->where('id','=',$request->id)
-              ->update([
-                'nama' => $request->nama,
-                'alamat' => $request->alamat,
-                'jabatan' => $request->jabatan,
-            ]);
-
-        return redirect('/karyawan');
+        //
     }
 
     /**
@@ -113,7 +88,6 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('karyawan')->where("id","=",$id)->delete();
-        return redirect('/karyawan');
+        //
     }
 }

@@ -28,10 +28,31 @@
             <p>Dashboard</p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="/karyawan" class="nav-link">
             <i class="nav-icon fas fa-file"></i>
             <p>Karyawan</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/books" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>books</p>
+            </a>
+        </li> --}}
+
+        <li class="nav-item">
+            <a href="/department" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>Department</p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="/position" class="nav-link">
+            <i class="nav-icon fas fa-file"></i>
+            <p>Position</p>
             </a>
         </li>
         </ul>

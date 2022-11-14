@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class KaryawanController extends Controller
+class BooksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,12 +14,12 @@ class KaryawanController extends Controller
      */
     public function index()
     {
-        $judul = "Karyawan";
+        $judul = "Books";
 
         // Query Builder
-        $karyawan = DB::table('karyawan')->get();
+        $karyawan = DB::table('books')->get();
 
-        return view('karyawan.home',[
+        return view('books.home',[
             "title" => $judul,
             "data" => $karyawan,
         ]);
@@ -32,8 +32,8 @@ class KaryawanController extends Controller
      */
     public function create()
     {
-        return view('karyawan.create',[
-            "title" => "Tambah Karyawan",
+        return view('books.create',[
+            "title" => "Tambah Buku",
         ]);
     }
 
@@ -47,13 +47,14 @@ class KaryawanController extends Controller
     {
         // dd($request);
 
-        DB::table('karyawan')->insert([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'jabatan' => $request->jabatan,
+        DB::table('books')->insert([
+            'title' => $request->title,
+            'author' => $request->author,
+            'year' => $request->year,
+            'publisher' => $request->publisher,
         ]);
 
-        return redirect('/karyawan');
+        return redirect('/books');
     }
 
     /**
@@ -75,13 +76,13 @@ class KaryawanController extends Controller
      */
     public function edit($id)
     {
-        $karyawan = DB::table('karyawan')->where("id","=",$id)->first();
+        $data = DB::table('books')->where("id","=",$id)->first();
 
         // dd($karyawan);
 
-        return view('karyawan.edit',[
-            "title" => "Edit Karyawan",
-            "data" => $karyawan,
+        return view('books.edit',[
+            "title" => "Edit Buku",
+            "data" => $data,
         ]);
     }
 
@@ -94,15 +95,16 @@ class KaryawanController extends Controller
      */
     public function update(Request $request)
     {
-        DB::table('karyawan')
+        DB::table('books')
               ->where('id','=',$request->id)
               ->update([
-                'nama' => $request->nama,
-                'alamat' => $request->alamat,
-                'jabatan' => $request->jabatan,
+                'title' => $request->title,
+                'author' => $request->author,
+                'year' => $request->year,
+                'publisher' => $request->publisher,
             ]);
 
-        return redirect('/karyawan');
+        return redirect('/books');
     }
 
     /**
@@ -113,7 +115,7 @@ class KaryawanController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('karyawan')->where("id","=",$id)->delete();
-        return redirect('/karyawan');
+        DB::table('books')->where("id","=",$id)->delete();
+        return redirect('/books');
     }
 }
